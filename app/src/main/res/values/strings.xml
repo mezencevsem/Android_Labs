@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Labs</string>
-
     <string-array name="labs">
         <item>1</item>
         <item>2</item>
@@ -23,7 +22,16 @@
         <item>19</item>
         <item>20</item>
     </string-array>
-
+    <string-array name="items1">
+        <item>item11</item>
+        <item>item12</item>
+        <item>item13</item>
+    </string-array>
+    <string-array name="items2">
+        <item>item21</item>
+        <item>item22</item>
+        <item>item23</item>
+    </string-array>
     <string name="button1_text">Button1</string>
     <string name="button2_text">Button2</string>
     <string name="button3_text">Button3</string>
