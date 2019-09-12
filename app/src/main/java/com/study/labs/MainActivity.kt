@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
                 "3" -> Lab3Activity::class.java
                 "4" -> Lab4Activity::class.java
                 "5" -> Lab5Activity::class.java
-                //"6" -> Lab6Activity::class.java
+                "6" -> Lab6Activity::class.java
                 //"7" -> Lab7Activity::class.java
                 //"8" -> Lab8Activity::class.java
                 //"9" -> Lab9Activity::class.java
