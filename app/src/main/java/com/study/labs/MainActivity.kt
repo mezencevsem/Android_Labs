@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                 "6" -> Lab6Activity::class.java
                 "7" -> Lab7Activity::class.java
                 "8" -> Lab8Activity::class.java
-                //"9" -> Lab9Activity::class.java
+                "9" -> Lab9Activity::class.java
                 else -> null
             }
 
