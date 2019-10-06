@@ -2,6 +2,7 @@
   <dictionary name="Mezencev">
     <words>
       <w>autofill</w>
+      <w>lateinit</w>
     </words>
   </dictionary>
 </component>
