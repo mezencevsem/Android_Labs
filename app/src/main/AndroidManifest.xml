@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Lab12ThirdActivity"></activity>
+        <activity android:name=".Lab13Activity"></activity>
+        <activity android:name=".Lab12ThirdActivity" />
         <activity android:name=".Lab12SecondActivity" />
         <activity android:name=".Lab12Activity" />
         <activity android:name=".Lab11SecondActivity" />

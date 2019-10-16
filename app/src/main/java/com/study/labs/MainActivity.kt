@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                 "10" -> Lab10Activity::class.java
                 "11" -> Lab11Activity::class.java
                 "12" -> Lab12Activity::class.java
+                "13" -> Lab13Activity::class.java
                 else -> null
             }
 
