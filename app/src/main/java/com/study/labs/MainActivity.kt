@@ -1,8 +1,8 @@
 package com.study.labs
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
                 "9" -> Lab9Activity::class.java
                 "10" -> Lab10Activity::class.java
                 "11" -> Lab11Activity::class.java
+                "12" -> Lab12Activity::class.java
                 else -> null
             }
 
