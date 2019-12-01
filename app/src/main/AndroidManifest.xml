@@ -4,6 +4,7 @@
     package="com.study.labs">
 
     <application
+        android:name=".Lab17App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Lab16Activity"></activity>
+        <activity android:name=".Lab17SecondActivity" />
+        <activity android:name=".Lab17Activity" />
+        <activity android:name=".Lab16Activity" />
         <activity android:name=".Lab15SecondActivity" />
         <activity android:name=".Lab15Activity" />
         <activity android:name=".Lab14SecondActivity" />
