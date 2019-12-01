@@ -11,9 +11,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button_debug.setOnClickListener {
-            startActivity(Intent(this, Lab17Activity::class.java))
+            startActivity(Intent(this, Lab18Activity::class.java))
         }
-
+        
         button.setOnClickListener {
             val labActivity = when (spinner.selectedItem.toString()) {
                 "1" -> Lab1Activity::class.java
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 "15" -> Lab15Activity::class.java
                 "16" -> Lab16Activity::class.java
                 "17" -> Lab17Activity::class.java
-                //"18" -> Lab18Activity::class.java
+                "18" -> Lab18Activity::class.java
                 //"19" -> Lab19Activity::class.java
                 //"20" -> Lab20Activity::class.java
                 //"21" -> Lab21Activity::class.java
