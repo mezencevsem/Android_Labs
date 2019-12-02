@@ -4,18 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_lab15.*
 
 class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
     private lateinit var adapter: Lab15Adapter
     private lateinit var array: MutableList<String>
+    private lateinit var app: Lab17App
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lab15)
         title = "Notes"
 
-        array = mutableListOf()
+        app = applicationContext as Lab17App
+
+        //array = mutableListOf()
+
+        array = app.notes
+
         adapter = Lab15Adapter(array)
         list_view.adapter = adapter
         list_view.onItemClickListener = this
@@ -27,7 +35,9 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val tv = view as TextView?
+        val root = view as LinearLayout?
+        val tv = root?.findViewById<TextView>(R.id.text_item)
+
         val intent = Intent(this, Lab15SecondActivity::class.java)
         intent.putExtra(EXTRA_ID, position)
         intent.putExtra(EXTRA_TEXT, tv?.text.toString())
@@ -51,5 +61,6 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
             }
             adapter.notifyDataSetChanged()
         }
+        list_view.invalidateViews()
     }
 }

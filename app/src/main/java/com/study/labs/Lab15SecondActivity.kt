@@ -10,8 +10,6 @@ class Lab15SecondActivity : Lab15BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lab15_second)
 
-        button_ok.isEnabled = edit_text.text.isNotEmpty()
-
         val arg = intent.extras
         edit_text.setText(arg?.getString(EXTRA_TEXT))
 
@@ -41,5 +39,10 @@ class Lab15SecondActivity : Lab15BaseActivity() {
             setResult(0)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        button_ok.isEnabled = edit_text.text.isNotEmpty()
     }
 }

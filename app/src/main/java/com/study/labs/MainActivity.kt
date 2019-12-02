@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button_debug.setOnClickListener {
-            startActivity(Intent(this, Lab18Activity::class.java))
+            startActivity(Intent(this, Lab15Activity::class.java))
         }
         
         button.setOnClickListener {
