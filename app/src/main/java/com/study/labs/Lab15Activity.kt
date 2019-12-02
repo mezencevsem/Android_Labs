@@ -51,12 +51,14 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
             val text = ex?.getString(EXTRA_TEXT)
             when (requestCode) {
                 CREATE_ACTION -> {
-                    adapter.list.add(text.toString())
+                    //adapter.list.add(text.toString())
+                    app.addNote(text.toString())
                 }
                 EDIT_ACTION -> {
                     val id = ex?.getInt(EXTRA_ID)
-                    adapter.list.removeAt(id!!)
-                    adapter.list.add(id, text.toString())
+                    //adapter.list.removeAt(id!!)
+                    //adapter.list.add(id, text.toString())
+                    app.editNote(id = id!!, text = text.toString())
                 }
             }
             adapter.notifyDataSetChanged()

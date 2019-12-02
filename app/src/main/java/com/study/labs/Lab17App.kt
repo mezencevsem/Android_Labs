@@ -11,4 +11,17 @@ class Lab17App(
         notes.add("Record 1")
         notes.add("Record 2")
     }
+
+    fun addNote(text: String) {
+        val toastHelper = Lab20ToastHelper(this)
+        notes.add(text)
+        toastHelper.show(resources.getString(R.string.create_note))
+    }
+
+    fun editNote(id: Int, text: String) {
+        val toastHelper = Lab20ToastHelper(this)
+        notes.removeAt(id)
+        notes.add(id, text)
+        toastHelper.show(resources.getString(R.string.edit_note))
+    }
 }

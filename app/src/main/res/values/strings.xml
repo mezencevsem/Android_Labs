@@ -62,4 +62,6 @@
     <string name="button4_text">Button4</string>
     <string name="button_default_text">***</string>
     <string name="mafioznik">Зубенко Михаил Петрович</string>
+    <string name="create_note">Create note</string>
+    <string name="edit_note">Edit note</string>
 </resources>
