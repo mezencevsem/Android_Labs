@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_lab15.*
 
 class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
     private lateinit var adapter: Lab15Adapter
-    private lateinit var array: MutableList<String>
+    private lateinit var array: MutableList<Note>
     private lateinit var app: Lab17App
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +36,14 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val root = view as LinearLayout?
-        val tv = root?.findViewById<TextView>(R.id.text_item)
+        val title = root?.findViewById<TextView>(R.id.text_title)?.text.toString()
+        val description = root?.findViewById<TextView>(R.id.text_description)?.text.toString()
 
         val intent = Intent(this, Lab15SecondActivity::class.java)
+
         intent.putExtra(EXTRA_ID, position)
-        intent.putExtra(EXTRA_TEXT, tv?.text.toString())
+        intent.putExtra(EXTRA_Note, Note(title = title, description = description, date = null))
+
         startActivityForResult(intent, EDIT_ACTION)
     }
 
@@ -48,17 +51,18 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             val ex = data?.extras
-            val text = ex?.getString(EXTRA_TEXT)
+            val note = ex?.getSerializable(EXTRA_Note) as Note
+
             when (requestCode) {
                 CREATE_ACTION -> {
                     //adapter.list.add(text.toString())
-                    app.addNote(text.toString())
+                    app.addNote(title = note.title, description = note.description)
                 }
                 EDIT_ACTION -> {
                     val id = ex?.getInt(EXTRA_ID)
                     //adapter.list.removeAt(id!!)
                     //adapter.list.add(id, text.toString())
-                    app.editNote(id = id!!, text = text.toString())
+                    app.editNote(id = id!!, title = note.title, description = note.description)
                 }
             }
             adapter.notifyDataSetChanged()

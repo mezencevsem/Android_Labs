@@ -30,16 +30,16 @@ class MainActivity : AppCompatActivity() {
                 "12" -> Lab12Activity::class.java
                 "13" -> Lab13Activity::class.java
                 "14" -> Lab14Activity::class.java
-                "15" -> Lab15Activity::class.java
+                "15" -> Lab15Activity::class.java //Notes
                 "16" -> Lab16Activity::class.java
                 "17" -> Lab17Activity::class.java
                 "18" -> Lab18Activity::class.java
-                "19" -> Lab15Activity::class.java
-                "20" -> Lab15Activity::class.java
-                "21" -> Lab15Activity::class.java
+                "19" -> Lab15Activity::class.java //Notes
+                "20" -> Lab15Activity::class.java //Notes
+                "21" -> Lab15Activity::class.java //Notes
                 "22" -> Lab22Activity::class.java
-                "23" -> Lab15Activity::class.java
-                //"24" -> Lab24Activity::class.java
+                "23" -> Lab15Activity::class.java //Notes
+                "24" -> Lab15Activity::class.java //Notes
                 //"25" -> Lab25Activity::class.java
                 //"26" -> Lab26Activity::class.java
                 //"27" -> Lab27Activity::class.java

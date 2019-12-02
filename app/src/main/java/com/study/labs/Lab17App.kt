@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import java.sql.Time
 
 const val NOTIFICATION_CREATE_NOTE = 200
 const val NOTIFICATION_EDIT_NOTE = 202
@@ -14,30 +15,38 @@ const val NOTIFICATION_EDIT_NOTE = 202
 class Lab17App(
     var text_1: String = "text_1",
     var text_2: String = "text_2",
-    var notes: ArrayList<String> = ArrayList()
+    var notes: MutableList<Note> = mutableListOf()
 ) : Application() {
 
     init {
-        notes.add("Record 1")
-        notes.add("Record 2")
+        notes.add(Note(
+            title = "Title",
+            description = "Description",
+            date = Time(System.currentTimeMillis())))
     }
 
-    fun addNote(text: String) {
+    fun addNote(title: String, description: String) {
         val toastHelper = Lab20ToastHelper(this)
-        notes.add(text)
+        notes.add(Note(
+            title = title,
+            description = description,
+            date = Time(System.currentTimeMillis())))
         toastHelper.show(resources.getString(R.string.create_note))
-        showNotification(NOTIFICATION_CREATE_NOTE, text)
+        showNotification(NOTIFICATION_CREATE_NOTE, title, description)
     }
 
-    fun editNote(id: Int, text: String) {
+    fun editNote(id: Int, title: String, description: String) {
         val toastHelper = Lab20ToastHelper(this)
         notes.removeAt(id)
-        notes.add(id, text)
+        notes.add(id, Note(
+            title = title,
+            description = description,
+            date = Time(System.currentTimeMillis())))
         toastHelper.show(resources.getString(R.string.edit_note))
-        showNotification(NOTIFICATION_EDIT_NOTE, text)
+        showNotification(NOTIFICATION_EDIT_NOTE, title, description)
     }
 
-    private fun showNotification(id: Int, text: String) {
+    private fun showNotification(id: Int, title: String, description: String) {
         val intent = Intent(this, Lab15Activity::class.java)
         intent.action = Intent.ACTION_MAIN
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
@@ -49,16 +58,16 @@ class Lab17App(
         val action: String
         if (id == NOTIFICATION_CREATE_NOTE) action = resources.getString(R.string.create_note)
         else action = resources.getString(R.string.edit_note)
-        view.setTextViewText(R.id.title, action)
-        view.setTextViewText(R.id.description, text)
+        view.setTextViewText(R.id.title, title)
+        view.setTextViewText(R.id.description, description)
 
         val builder = NotificationCompat.Builder(this)
         builder
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(resources.getString(R.string.mafioznik))
+            .setContentTitle(resources.getString(R.string.app_name))
             .setContentIntent(contentIntent)
             .setAutoCancel(true)
-            .setTicker("New note action")
+            .setTicker(action)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContent(view)
 
