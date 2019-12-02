@@ -1,11 +1,13 @@
 package com.study.labs
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import java.util.*
 
 class Lab15Adapter(val list: MutableList<String>) : BaseAdapter() {
     private lateinit var app: Lab17App
@@ -23,6 +25,7 @@ class Lab15Adapter(val list: MutableList<String>) : BaseAdapter() {
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View? {
+        val random: Random = Random()
         var view = view
         val context = parent.context
         app = context.applicationContext as Lab17App
@@ -31,14 +34,16 @@ class Lab15Adapter(val list: MutableList<String>) : BaseAdapter() {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.list_item_lab19, parent, false)
+            val colorBox = view?.findViewById<ColoredView>(R.id.color_box)
+            colorBox?.setColor(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)))
         }
 
         /*val tv = view as TextView?
         tv!!.text = list[position]
         */
 
-        val tv = view?.findViewById<TextView>(R.id.text_item)
-        tv?.text = list[position]
+        val textView = view?.findViewById<TextView>(R.id.text_item)
+        textView?.text = list[position]
 
         return view
     }

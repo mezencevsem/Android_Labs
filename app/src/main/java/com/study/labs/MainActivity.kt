@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 "18" -> Lab18Activity::class.java
                 "19" -> Lab15Activity::class.java
                 "20" -> Lab15Activity::class.java
-                //"21" -> Lab21Activity::class.java
+                "21" -> Lab15Activity::class.java
                 //"22" -> Lab22Activity::class.java
                 //"23" -> Lab23Activity::class.java
                 //"24" -> Lab24Activity::class.java

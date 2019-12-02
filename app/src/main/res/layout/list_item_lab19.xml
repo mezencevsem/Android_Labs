@@ -6,11 +6,11 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <TextView
+    <com.study.labs.ColoredView
+        android:id="@+id/color_box"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/colorRed" />
+        android:layout_marginEnd="8dp"/>
 
     <TextView
         android:id="@+id/text_item"
