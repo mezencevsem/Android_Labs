@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Lab25Activity">
+    tools:context=".Lab25Activity"
+    tools:ignore="HardcodedText">
 
     <ListView
         android:id="@+id/list_view"
@@ -42,7 +43,40 @@
         android:hint="Age"
         android:inputType="number"
         android:text="20"
-        app:layout_constraintBottom_toTopOf="@id/button_add" />
+        app:layout_constraintBottom_toTopOf="@id/button_search" />
+
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Search"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        app:layout_constraintEnd_toStartOf="@id/button_edit"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Edit"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        app:layout_constraintEnd_toStartOf="@id/button_delete"
+        app:layout_constraintStart_toEndOf="@id/button_search" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Delete"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_edit" />
 
     <Button
         android:id="@+id/button_add"
