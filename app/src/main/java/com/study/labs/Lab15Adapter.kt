@@ -52,6 +52,9 @@ class Lab15Adapter(private val list: MutableList<Note>) : BaseAdapter() {
         val date = view?.findViewById<TextView>(R.id.text_date)
         date?.text = list[position].date
 
+        val priority = view?.findViewById<TextView>(R.id.text_priority)
+        priority?.text = list[position].priority.name
+
         return view
     }
 }

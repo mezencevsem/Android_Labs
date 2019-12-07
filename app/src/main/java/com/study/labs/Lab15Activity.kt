@@ -22,7 +22,12 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
 
         app = applicationContext as Lab17App
         if (app.notes.size == 0) {
-            app.testInsert("Title", "Description", Time(System.currentTimeMillis()).toString())
+            app.testInsert(
+                title = "Title",
+                description = "Description",
+                date = Time(System.currentTimeMillis()).toString(),
+                priority = Priority.High
+            )
         }
 
         array = app.notes
@@ -46,12 +51,26 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         val title = root?.findViewById<TextView>(R.id.text_title)?.text.toString()
         val description = root?.findViewById<TextView>(R.id.text_description)?.text.toString()
         val date = root?.findViewById<TextView>(R.id.text_date)?.text.toString()
+        val priority = root?.findViewById<TextView>(R.id.text_priority)?.text.toString()
 
         val intent = Intent(this, Lab15SecondActivity::class.java)
 
-        editId = app.getNoteId(title = title, description = description, date = date)
+        editId = app.getNoteId(
+            title = title,
+            description = description,
+            date = date,
+            priority = Priority.valueOf(priority)
+        )
+
         if (editId != null) {
-            intent.putExtra(EXTRA_Note, Note(title = title, description = description, date = null))
+            intent.putExtra(
+                EXTRA_Note, Note(
+                    title = title,
+                    description = description,
+                    date = null,
+                    priority = Priority.valueOf(priority)
+                )
+            )
             startActivityForResult(intent, EDIT_ACTION)
         }
     }
@@ -64,13 +83,18 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
 
             when (requestCode) {
                 CREATE_ACTION -> {
-                    app.addNote(title = note.title, description = note.description)
+                    app.addNote(
+                        title = note.title,
+                        description = note.description,
+                        priority = note.priority
+                    )
                 }
                 EDIT_ACTION -> {
                     app.editNote(
                         editId = editId!!,
                         title = note.title,
-                        description = note.description
+                        description = note.description,
+                        priority = note.priority
                     )
                 }
             }

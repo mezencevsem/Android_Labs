@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="@dimen/padding"
-        tools:src="@drawable/photo" />
+        tools:src="@drawable/notes" />
 
     <TextView
         android:id="@+id/title"

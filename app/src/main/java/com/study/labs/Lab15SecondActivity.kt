@@ -3,6 +3,7 @@ package com.study.labs
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_lab15_second.*
 import java.sql.Time
 
@@ -12,11 +13,17 @@ class Lab15SecondActivity : Lab15BaseActivity() {
         setContentView(R.layout.activity_lab15_second)
         title = "Edit note"
 
+        val adapter = ArrayAdapter<String>(this, R.layout.list_item_lab5)
+        spinner_priority.adapter = adapter
+        adapter.addAll(Priority.getItemsArray())
+        spinner_priority.setSelection(Priority.Low.ordinal)
+
         val arg = intent.extras
         if (arg != null) {
             val note = arg.getSerializable(EXTRA_Note) as Note
             edit_text_title.setText(note.title)
             edit_text_description.setText(note.description)
+            spinner_priority.setSelection(note.priority.ordinal)
         }
 
         edit_text_description.addTextChangedListener(object : TextWatcher {
@@ -37,7 +44,8 @@ class Lab15SecondActivity : Lab15BaseActivity() {
                 Note(
                     title = edit_text_title.text.toString(),
                     description = edit_text_description.text.toString(),
-                    date = Time(System.currentTimeMillis()).toString()
+                    date = Time(System.currentTimeMillis()).toString(),
+                    priority = Priority.valueOf(spinner_priority.selectedItemPosition)
                 )
             )
 

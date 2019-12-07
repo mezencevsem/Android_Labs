@@ -1,6 +1,8 @@
 package com.study.labs
 
-enum class Priority {
+import java.io.Serializable
+
+enum class Priority : Serializable {
     High,
     Medium,
     Low;
@@ -13,6 +15,14 @@ enum class Priority {
                 }
             }
             throw IllegalArgumentException()
+        }
+
+        fun getItemsArray(): MutableList<String> {
+            val array = mutableListOf<String>()
+            for (item in values()) {
+                array.add(item.name)
+            }
+            return array
         }
     }
 }

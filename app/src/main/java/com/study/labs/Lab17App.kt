@@ -28,13 +28,14 @@ class Lab17App(
         db = dbHelper.writableDatabase
     }
 
-    fun testInsert(title: String, description: String, date: String) {
+    fun testInsert(title: String, description: String, date: String, priority: Priority) {
         val cursor = db.query(TABLE_NOTEBOOK_NAME, null, null, null, null, null, null)
         if (cursor.moveToFirst()) return
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
         cv.put(COLUMN_NOTE_DATE, date)
+        cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.insert(TABLE_NOTEBOOK_NAME, null, cv)
         cursor.close()
@@ -51,7 +52,8 @@ class Lab17App(
                     Note(
                         title = cursor.getString(1),
                         description = cursor.getString(2),
-                        date = cursor.getString(3)
+                        date = cursor.getString(3),
+                        priority = Priority.valueOf(cursor.getInt(4))
                     )
                 )
             } while (cursor.moveToNext())
@@ -60,13 +62,14 @@ class Lab17App(
         cursor.close()
     }
 
-    fun addNote(title: String, description: String) {
+    fun addNote(title: String, description: String, priority: Priority) {
         val toastHelper = Lab20ToastHelper(this)
 
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
         cv.put(COLUMN_NOTE_DATE, Time(System.currentTimeMillis()).toString())
+        cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.insert(TABLE_NOTEBOOK_NAME, null, cv)
 
@@ -74,12 +77,15 @@ class Lab17App(
         showNotification(NOTIFICATION_CREATE_NOTE, title, description)
     }
 
-    fun getNoteId(title: String, description: String, date: String): Int? {
+    fun getNoteId(title: String, description: String, date: String, priority: Priority): Int? {
         val cursor = db.query(
             TABLE_NOTEBOOK_NAME,
             null,
-            "$COLUMN_NOTE_TITLE = ? AND $COLUMN_NOTE_DESCRIPTION = ? AND $COLUMN_NOTE_DATE = ?",
-            arrayOf(title, description, date),
+            "$COLUMN_NOTE_TITLE = ? " +
+                    "AND $COLUMN_NOTE_DESCRIPTION = ? " +
+                    "AND $COLUMN_NOTE_DATE = ? " +
+                    "AND $COLUMN_NOTE_PRIORITY = ?",
+            arrayOf(title, description, date, priority.ordinal.toString()),
             null,
             null,
             null
@@ -94,13 +100,14 @@ class Lab17App(
         return null
     }
 
-    fun editNote(editId: Int, title: String, description: String) {
+    fun editNote(editId: Int, title: String, description: String, priority: Priority) {
         val toastHelper = Lab20ToastHelper(this)
 
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
         cv.put(COLUMN_NOTE_DATE, Time(System.currentTimeMillis()).toString())
+        cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.update(TABLE_NOTEBOOK_NAME, cv, "$COLUMN_NOTE_ID = ?", arrayOf(editId.toString()))
 
@@ -116,7 +123,7 @@ class Lab17App(
         val contentIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         val view = RemoteViews(packageName, R.layout.notification)
-        view.setImageViewResource(R.id.image, R.drawable.image)
+        view.setImageViewResource(R.id.image, R.drawable.notes)
         val action: String =
             if (id == NOTIFICATION_CREATE_NOTE) resources.getString(R.string.create_note)
             else resources.getString(R.string.edit_note)
