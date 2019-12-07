@@ -7,11 +7,13 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_lab15.*
+import java.sql.Time
 
 class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
-    private lateinit var adapter: Lab15Adapter
-    private lateinit var array: MutableList<Note>
     private lateinit var app: Lab17App
+    private lateinit var array: MutableList<Note>
+    private lateinit var adapter: Lab15Adapter
+    private var editId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,11 +21,11 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         title = "Notes"
 
         app = applicationContext as Lab17App
-
-        //array = mutableListOf()
+        if (app.notes.size == 0) {
+            app.testInsert("Title", "Description", Time(System.currentTimeMillis()).toString())
+        }
 
         array = app.notes
-
         adapter = Lab15Adapter(array)
         list_view.adapter = adapter
         list_view.onItemClickListener = this
@@ -34,17 +36,24 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        app.showAllNotes()
+    }
+
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val root = view as LinearLayout?
         val title = root?.findViewById<TextView>(R.id.text_title)?.text.toString()
         val description = root?.findViewById<TextView>(R.id.text_description)?.text.toString()
+        val date = root?.findViewById<TextView>(R.id.text_date)?.text.toString()
 
         val intent = Intent(this, Lab15SecondActivity::class.java)
 
-        intent.putExtra(EXTRA_ID, position)
-        intent.putExtra(EXTRA_Note, Note(title = title, description = description, date = null))
-
-        startActivityForResult(intent, EDIT_ACTION)
+        editId = app.getNoteId(title = title, description = description, date = date)
+        if (editId != null) {
+            intent.putExtra(EXTRA_Note, Note(title = title, description = description, date = null))
+            startActivityForResult(intent, EDIT_ACTION)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,18 +64,19 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
 
             when (requestCode) {
                 CREATE_ACTION -> {
-                    //adapter.list.add(text.toString())
                     app.addNote(title = note.title, description = note.description)
                 }
                 EDIT_ACTION -> {
-                    val id = ex?.getInt(EXTRA_ID)
-                    //adapter.list.removeAt(id!!)
-                    //adapter.list.add(id, text.toString())
-                    app.editNote(id = id!!, title = note.title, description = note.description)
+                    app.editNote(
+                        editId = editId!!,
+                        title = note.title,
+                        description = note.description
+                    )
                 }
             }
+            app.showAllNotes()
             adapter.notifyDataSetChanged()
+            list_view.invalidateViews()
         }
-        list_view.invalidateViews()
     }
 }

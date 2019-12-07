@@ -10,15 +10,16 @@ class Lab15SecondActivity : Lab15BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lab15_second)
+        title = "Edit note"
 
         val arg = intent.extras
         if (arg != null) {
-            val note = arg?.getSerializable(EXTRA_Note) as Note
+            val note = arg.getSerializable(EXTRA_Note) as Note
             edit_text_title.setText(note.title)
             edit_text_description.setText(note.description)
         }
 
-        edit_text_description.addTextChangedListener(object : TextWatcher{
+        edit_text_description.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -30,14 +31,15 @@ class Lab15SecondActivity : Lab15BaseActivity() {
 
         button_ok.setOnClickListener {
             val intent = intent
-            intent.putExtra(EXTRA_Note,
+
+            intent.putExtra(
+                EXTRA_Note,
                 Note(
                     title = edit_text_title.text.toString(),
                     description = edit_text_description.text.toString(),
-                    date = Time(System.currentTimeMillis())
-                ))
-
-            if (arg != null) intent.putExtra(EXTRA_ID, arg.getInt(EXTRA_ID))
+                    date = Time(System.currentTimeMillis()).toString()
+                )
+            )
 
             setResult(RESULT_OK, intent)
             finish()
