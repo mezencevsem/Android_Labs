@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_lab15_second.*
-import java.sql.Time
 
 class Lab15SecondActivity : Lab15BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class Lab15SecondActivity : Lab15BaseActivity() {
                 Note(
                     title = edit_text_title.text.toString(),
                     description = edit_text_description.text.toString(),
-                    date = Time(System.currentTimeMillis()).toString(),
+                    date = System.currentTimeMillis(),
                     priority = Priority.valueOf(spinner_priority.selectedItemPosition)
                 )
             )

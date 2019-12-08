@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-const val DATABASE_NOTEBOOK_VERSION = 11
+const val DATABASE_NOTEBOOK_VERSION = 18
 const val DATABASE_NOTEBOOK_NAME = "notesDB"
 
 const val TABLE_NOTEBOOK_NAME = "notesTable"
@@ -28,7 +28,7 @@ class Lab15Database(
                     "$COLUMN_NOTE_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "$COLUMN_NOTE_TITLE TEXT," +
                     "$COLUMN_NOTE_DESCRIPTION TEXT," +
-                    "$COLUMN_NOTE_DATE TEXT," +
+                    "$COLUMN_NOTE_DATE INTEGER," +
                     "$COLUMN_NOTE_PRIORITY INTEGER);"
         )
     }

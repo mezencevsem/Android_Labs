@@ -7,7 +7,6 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_lab15.*
-import java.sql.Time
 
 class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
     private lateinit var app: Lab17App
@@ -25,7 +24,7 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
             app.testInsert(
                 title = "Title",
                 description = "Description",
-                date = Time(System.currentTimeMillis()).toString(),
+                date = System.currentTimeMillis(),
                 priority = Priority.High
             )
         }
@@ -50,7 +49,6 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         val root = view as LinearLayout?
         val title = root?.findViewById<TextView>(R.id.text_title)?.text.toString()
         val description = root?.findViewById<TextView>(R.id.text_description)?.text.toString()
-        val date = root?.findViewById<TextView>(R.id.text_date)?.text.toString()
         val priority = root?.findViewById<TextView>(R.id.text_priority)?.text.toString()
 
         val intent = Intent(this, Lab15SecondActivity::class.java)
@@ -58,7 +56,6 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         editId = app.getNoteId(
             title = title,
             description = description,
-            date = date,
             priority = Priority.valueOf(priority)
         )
 
@@ -67,7 +64,7 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
                 EXTRA_Note, Note(
                     title = title,
                     description = description,
-                    date = null,
+                    date = 0,
                     priority = Priority.valueOf(priority)
                 )
             )

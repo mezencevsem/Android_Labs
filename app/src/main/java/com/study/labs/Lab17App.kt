@@ -9,7 +9,6 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import java.sql.Time
 
 const val NOTIFICATION_CREATE_NOTE = 200
 const val NOTIFICATION_EDIT_NOTE = 202
@@ -28,7 +27,7 @@ class Lab17App(
         db = dbHelper.writableDatabase
     }
 
-    fun testInsert(title: String, description: String, date: String, priority: Priority) {
+    fun testInsert(title: String, description: String, date: Long, priority: Priority) {
         val cursor = db.query(TABLE_NOTEBOOK_NAME, null, null, null, null, null, null)
         if (cursor.moveToFirst()) return
         val cv = ContentValues()
@@ -52,7 +51,7 @@ class Lab17App(
                     Note(
                         title = cursor.getString(1),
                         description = cursor.getString(2),
-                        date = cursor.getString(3),
+                        date = cursor.getLong(3),
                         priority = Priority.valueOf(cursor.getInt(4))
                     )
                 )
@@ -68,7 +67,7 @@ class Lab17App(
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
-        cv.put(COLUMN_NOTE_DATE, Time(System.currentTimeMillis()).toString())
+        cv.put(COLUMN_NOTE_DATE, System.currentTimeMillis())
         cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.insert(TABLE_NOTEBOOK_NAME, null, cv)
@@ -77,15 +76,15 @@ class Lab17App(
         showNotification(NOTIFICATION_CREATE_NOTE, title, description)
     }
 
-    fun getNoteId(title: String, description: String, date: String, priority: Priority): Int? {
+    fun getNoteId(title: String, description: String, priority: Priority): Int? {
+        //TODO date
         val cursor = db.query(
             TABLE_NOTEBOOK_NAME,
             null,
             "$COLUMN_NOTE_TITLE = ? " +
                     "AND $COLUMN_NOTE_DESCRIPTION = ? " +
-                    "AND $COLUMN_NOTE_DATE = ? " +
                     "AND $COLUMN_NOTE_PRIORITY = ?",
-            arrayOf(title, description, date, priority.ordinal.toString()),
+            arrayOf(title, description, priority.ordinal.toString()),
             null,
             null,
             null
@@ -106,7 +105,7 @@ class Lab17App(
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
-        cv.put(COLUMN_NOTE_DATE, Time(System.currentTimeMillis()).toString())
+        cv.put(COLUMN_NOTE_DATE, System.currentTimeMillis())
         cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.update(TABLE_NOTEBOOK_NAME, cv, "$COLUMN_NOTE_ID = ?", arrayOf(editId.toString()))
