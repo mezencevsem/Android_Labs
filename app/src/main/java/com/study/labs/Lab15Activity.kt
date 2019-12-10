@@ -83,6 +83,7 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
                     app.addNote(
                         title = note.title,
                         description = note.description,
+                        date = note.date,
                         priority = note.priority
                     )
                 }
@@ -91,6 +92,7 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
                         editId = editId!!,
                         title = note.title,
                         description = note.description,
+                        date = note.date,
                         priority = note.priority
                     )
                 }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-const val DATABASE_NOTEBOOK_VERSION = 18
+const val DATABASE_NOTEBOOK_VERSION = 20
 const val DATABASE_NOTEBOOK_NAME = "notesDB"
 
 const val TABLE_NOTEBOOK_NAME = "notesTable"

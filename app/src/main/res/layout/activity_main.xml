@@ -24,12 +24,12 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/button_debug"
+        android:id="@+id/button_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:layout_margin="@dimen/margin"
-        android:text="Debug"
+        android:text="Notes"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import java.sql.Time
 import java.util.*
 
 class Lab15Adapter(private val list: MutableList<Note>) : BaseAdapter() {
@@ -51,7 +50,9 @@ class Lab15Adapter(private val list: MutableList<Note>) : BaseAdapter() {
         description?.text = list[position].description
 
         val date = view?.findViewById<TextView>(R.id.text_date)
-        date?.text = Time(list[position].date).toString()
+        val today = Calendar.getInstance()
+        today.timeInMillis = list[position].date
+        date?.text = today.time.toString()
 
         val priority = view?.findViewById<TextView>(R.id.text_priority)
         priority?.text = list[position].priority.name

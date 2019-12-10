@@ -61,13 +61,13 @@ class Lab17App(
         cursor.close()
     }
 
-    fun addNote(title: String, description: String, priority: Priority) {
+    fun addNote(title: String, description: String, date: Long, priority: Priority) {
         val toastHelper = Lab20ToastHelper(this)
 
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
-        cv.put(COLUMN_NOTE_DATE, System.currentTimeMillis())
+        cv.put(COLUMN_NOTE_DATE, date)
         cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.insert(TABLE_NOTEBOOK_NAME, null, cv)
@@ -77,7 +77,7 @@ class Lab17App(
     }
 
     fun getNoteId(title: String, description: String, priority: Priority): Int? {
-        //TODO date
+        //TODO add date search
         val cursor = db.query(
             TABLE_NOTEBOOK_NAME,
             null,
@@ -99,13 +99,13 @@ class Lab17App(
         return null
     }
 
-    fun editNote(editId: Int, title: String, description: String, priority: Priority) {
+    fun editNote(editId: Int, title: String, description: String, date: Long, priority: Priority) {
         val toastHelper = Lab20ToastHelper(this)
 
         val cv = ContentValues()
         cv.put(COLUMN_NOTE_TITLE, title)
         cv.put(COLUMN_NOTE_DESCRIPTION, description)
-        cv.put(COLUMN_NOTE_DATE, System.currentTimeMillis())
+        cv.put(COLUMN_NOTE_DATE, date)
         cv.put(COLUMN_NOTE_PRIORITY, priority.ordinal)
 
         db.update(TABLE_NOTEBOOK_NAME, cv, "$COLUMN_NOTE_ID = ?", arrayOf(editId.toString()))

@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button_debug.setOnClickListener {
-            startActivity(Intent(this, Lab32Activity::class.java))
+        button_notes.setOnClickListener {
+            startActivity(Intent(this, Lab15Activity::class.java))
         }
         
         button.setOnClickListener {
