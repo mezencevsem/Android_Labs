@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Lab31TimePickerActivity"></activity>
+        <activity android:name=".Lab32Activity"></activity>
+        <activity android:name=".Lab31TimePickerActivity" />
         <activity android:name=".Lab31DatePickerActivity" />
         <activity android:name=".Lab31Activity" />
         <activity android:name=".Lab29Activity" />

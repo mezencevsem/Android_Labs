@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button_debug.setOnClickListener {
-            startActivity(Intent(this, Lab31Activity::class.java))
+            startActivity(Intent(this, Lab32Activity::class.java))
         }
         
         button.setOnClickListener {
@@ -47,9 +47,9 @@ class MainActivity : AppCompatActivity() {
                 "29" -> Lab29Activity::class.java
                 "30" -> Lab15Activity::class.java //Notes
                 "31" -> Lab31Activity::class.java
-                //"32" -> Lab32Activity::class.java
-                //"33" -> Lab15Activity::class.java //Notes
-                //"34" -> Lab15Activity::class.java //Notes
+                "32" -> Lab32Activity::class.java
+                "33" -> Lab15Activity::class.java //Notes
+                "34" -> Lab15Activity::class.java //Notes
                 else -> null
             }
 
