@@ -114,6 +114,14 @@ class Lab17App(
         showNotification(NOTIFICATION_EDIT_NOTE, title, description)
     }
 
+    fun deleteAllNotes() {
+        val toastHelper = Lab20ToastHelper(this)
+
+        db.delete(TABLE_NOTEBOOK_NAME, null, null)
+
+        toastHelper.show("All notes was deleted")
+    }
+
     private fun showNotification(id: Int, title: String, description: String) {
         val intent = Intent(this, Lab15Activity::class.java)
         intent.action = Intent.ACTION_MAIN
@@ -122,7 +130,7 @@ class Lab17App(
         val contentIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         val view = RemoteViews(packageName, R.layout.notification)
-        view.setImageViewResource(R.id.image, R.drawable.notes)
+        view.setImageViewResource(R.id.image, R.drawable.notes_small)
         val action: String =
             if (id == NOTIFICATION_CREATE_NOTE) resources.getString(R.string.create_note)
             else resources.getString(R.string.edit_note)

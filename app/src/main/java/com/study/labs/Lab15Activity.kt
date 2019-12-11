@@ -2,6 +2,8 @@ package com.study.labs
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
@@ -101,5 +103,20 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
             adapter.notifyDataSetChanged()
             list_view.invalidateViews()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_delete) {
+            app.deleteAllNotes()
+            app.showAllNotes()
+            adapter.notifyDataSetChanged()
+            list_view.invalidateViews()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
