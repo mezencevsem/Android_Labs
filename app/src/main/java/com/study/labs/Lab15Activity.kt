@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_lab15.*
+import java.util.*
 
 class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
     private lateinit var app: Lab17App
@@ -52,6 +53,7 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         val title = root?.findViewById<TextView>(R.id.text_title)?.text.toString()
         val description = root?.findViewById<TextView>(R.id.text_description)?.text.toString()
         val priority = root?.findViewById<TextView>(R.id.text_priority)?.text.toString()
+        val date = root?.findViewById<TextView>(R.id.text_date)?.text.toString()
 
         val intent = Intent(this, Lab15SecondActivity::class.java)
 
@@ -62,11 +64,13 @@ class Lab15Activity : Lab15BaseActivity(), AdapterView.OnItemClickListener {
         )
 
         if (editId != null) {
+
+
             intent.putExtra(
                 EXTRA_Note, Note(
                     title = title,
                     description = description,
-                    date = 0,
+                    date = Date.parse(date),
                     priority = Priority.valueOf(priority)
                 )
             )

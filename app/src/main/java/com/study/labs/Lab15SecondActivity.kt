@@ -24,6 +24,7 @@ class Lab15SecondActivity : Lab15BaseActivity() {
         spinner_priority.adapter = adapter
         adapter.addAll(Priority.getItemsArray())
         spinner_priority.setSelection(Priority.Low.ordinal)
+        text_date.text = timeDate.time.toString()
 
         val arg = intent.extras
         if (arg != null) {
@@ -31,6 +32,8 @@ class Lab15SecondActivity : Lab15BaseActivity() {
             edit_text_title.setText(note.title)
             edit_text_description.setText(note.description)
             spinner_priority.setSelection(note.priority.ordinal)
+            timeDate.timeInMillis = note.date
+            text_date.text = timeDate.time.toString()
         }
 
         edit_text_description.addTextChangedListener(object : TextWatcher {
@@ -44,12 +47,28 @@ class Lab15SecondActivity : Lab15BaseActivity() {
         })
 
         button_ok.setOnClickListener {
-            showDialog(1)
+            val intent = intent
+            intent.putExtra(
+                EXTRA_Note,
+                Note(
+                    title = edit_text_title.text.toString(),
+                    description = edit_text_description.text.toString(),
+                    date = timeDate.timeInMillis,
+                    priority = Priority.valueOf(spinner_priority.selectedItemPosition)
+                )
+            )
+
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
         button_cancel.setOnClickListener {
             setResult(0)
             finish()
+        }
+
+        text_date.setOnClickListener {
+            showDialog(1)
         }
     }
 
@@ -97,21 +116,8 @@ class Lab15SecondActivity : Lab15BaseActivity() {
                 ad.setPositiveButton("Choice") { dialog, which ->
                     timeDate.set(Calendar.HOUR_OF_DAY, timePicker!!.currentHour)
                     timeDate.set(Calendar.MINUTE, timePicker.currentMinute)
+                    text_date.text = timeDate.time.toString()
                     dialog.cancel()
-                    //Done, back to the notes
-                    val intent = intent
-                    intent.putExtra(
-                        EXTRA_Note,
-                        Note(
-                            title = edit_text_title.text.toString(),
-                            description = edit_text_description.text.toString(),
-                            date = timeDate.timeInMillis,
-                            priority = Priority.valueOf(spinner_priority.selectedItemPosition)
-                        )
-                    )
-
-                    setResult(RESULT_OK, intent)
-                    finish()
                 }
 
                 ad.setNegativeButton("Back") { dialog, which ->
